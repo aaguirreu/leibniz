@@ -71,4 +71,4 @@ def parse_txt_to_csv(txtfile):
         parallel_approximation_df.to_excel(writer, sheet_name='Aproximación Paralela de pi')
         sequential_approximation_df.to_excel(writer, sheet_name='Aproximación Secuencial de pi')
 
-parse_txt_to_csv('archivo.txt')
+parse_txt_to_csv('output.txt')
