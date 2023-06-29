@@ -28,11 +28,12 @@ double pi_paralelo(int numThreads, size_t numDarts) {
 
     #pragma omp parallel num_threads(numThreads) reduction(+:dartsInCircle)
 {
+        // Generación de una semilla única para cada hilo
         unsigned int seed = (unsigned int)time(NULL) + omp_get_thread_num();
         srand(seed);
-        int threadID = omp_get_thread_num();
-        #pragma omp for 
-        for (size_t i = threadID; i < numDarts; i += numThreads) {
+        
+        #pragma omp for schedule(static, numDarts / numThreads)
+        for (size_t i = 0; i < numDarts; i++) {
             // Generar coordenadas aleatorias dentro del cuadrado
             x = ((double)rand() / (double)RAND_MAX) * 2.0 - 1.0;
             y = ((double)rand() / (double)RAND_MAX) * 2.0 - 1.0;
